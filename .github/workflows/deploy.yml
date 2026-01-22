@@ -45,7 +45,7 @@ jobs:
                 echo "Git repo not found!"
                 echo "Cloning the repo"
 
-                git clone "https://github.com/arjunsharma6622/poc10-aws-app" .
+                git clone "https://github.com/NikithaMalthumkar/Poc10" .
             fi
 
             echo "Installing npm..."
