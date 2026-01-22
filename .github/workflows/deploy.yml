@@ -1,0 +1,23 @@
+name: Deploy App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Deploy to EC2
+      run: |
+        ssh -o StrictHostKeyChecking=no ubuntu@${{ secrets.EC2_IP }} "
+          sudo rm -rf /home/ubuntu/app &&
+          mkdir /home/ubuntu/app &&
+          exit
+        "
+        scp -o StrictHostKeyChecking=no index.html ubuntu@${{ secrets.EC2_IP }}:/home/ubuntu/app/
+        ssh ubuntu@${{ secrets.EC2_IP }} "bash /home/ubuntu/app/deploy.sh"
